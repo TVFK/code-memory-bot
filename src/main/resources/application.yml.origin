@@ -6,3 +6,7 @@ spring:
     url: jdbc:postgresql://localhost:5433/memory_code_db
     username: username
     password: password
+
+bot:
+  token: token
+  name: name

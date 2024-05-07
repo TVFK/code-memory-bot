@@ -7,3 +7,5 @@ target/
 *.iml
 *.ipr
 .idea/
+
+application.yml
