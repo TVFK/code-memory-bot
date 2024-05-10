@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    
+    <changeSet id="create-table-memory_page" author="Taf">
+        <createTable tableName="memory_page">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tg_user_id" type="BIGINT">
+                <constraints foreignKeyName="fk_memory_page_tg_user" references="tg_user(id)"/>
+            </column>
+            <column name="person_id" type="BIGINT">
+                <constraints unique="true" foreignKeyName="fk_memory_page_person" references="person(id)"/>
+            </column>
+            <column name="epitaph" type="TEXT"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

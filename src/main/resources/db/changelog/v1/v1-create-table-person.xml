@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-person" author="Taf">
+        <createTable tableName="person">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="photo" type="BLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_date" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="death_date" type="TIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_place" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="citizenship" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="burial_place" type="VARCHAR(255)"/>
+            <column name="spouse" type="VARCHAR(255)"/>
+            <column name="occupation" type="VARCHAR(255)"/>
+            <column name="education" type="VARCHAR(255)"/>
+            <column name="awards" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

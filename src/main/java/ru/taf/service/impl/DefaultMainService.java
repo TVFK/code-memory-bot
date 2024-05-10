@@ -1,4 +1,6 @@
-package ru.taf.service;
+package ru.taf.service.impl;
+
+import ru.taf.service.MainService;
 
 public class DefaultMainService implements MainService {
     @Override

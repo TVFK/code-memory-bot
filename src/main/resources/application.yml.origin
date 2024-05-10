@@ -6,7 +6,9 @@ spring:
     url: jdbc:postgresql://localhost:5433/memory_code_db
     username: username
     password: password
+   liquibase:
+     change-log: classpath:db/changelog/db.changelog-master.xml
 
 bot:
-  token: token
-  name: name
+  token: bot_token
+  name: bot_name

@@ -22,7 +22,7 @@ public class MemoryPage {
 
     @ManyToOne
     @JoinColumn(name = "tg_user_id", referencedColumnName = "id")
-    private TgUser tgUser;
+    private TgUser author;
 
     @OneToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")

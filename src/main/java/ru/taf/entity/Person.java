@@ -43,7 +43,7 @@ public class Person {
     @Column(name = "citizenship")
     private String citizenship;
 
-    @Column(name = "death_place")
+    @Column(name = "burial_place")
     private String deathPlace;
 
     @Column(name = "spouse")
