@@ -6,4 +6,6 @@ import ru.taf.entity.TgUser;
 
 @Repository
 public interface TgUserRepository extends JpaRepository<TgUser, Long> {
+
+    TgUser findTgUserByTelegramUserId(Long id);
 }

@@ -3,7 +3,6 @@ package ru.taf.enums;
 public enum BotCommands {
     HELP("/help"),
     START("/start"),
-    CANCEL("/cancel"),
     ALL_MEMORY_PAGES("/my_pages"),
     NEW_MEMORY_PAGE("/new_page");
 

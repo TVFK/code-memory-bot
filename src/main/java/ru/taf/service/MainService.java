@@ -1,7 +1,8 @@
 package ru.taf.service;
 
+import org.telegram.telegrambots.meta.api.objects.Update;
+
 public interface MainService {
-    void processTextMessage();
-    void processDocumentMessage();
-    void processPhotoMessage();
+
+    void processMessage(Update update, TelegramMemoryBot memoryBot);
 }

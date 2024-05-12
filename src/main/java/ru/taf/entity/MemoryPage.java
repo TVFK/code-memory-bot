@@ -1,15 +1,13 @@
 package ru.taf.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Getter
 @Setter
 @Entity
@@ -26,11 +24,8 @@ public class MemoryPage {
 
     @OneToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
-    private Person person; 
+    private Person person;
 
     @Column(name = "epitaph")
     private String epitaph;
-
-    @Column(name = "create_time")
-    private LocalDateTime createTime;
 }
