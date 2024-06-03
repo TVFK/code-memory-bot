@@ -15,7 +15,6 @@
             <column name="person_id" type="BIGINT">
                 <constraints unique="true" foreignKeyName="fk_memory_page_person" references="person(id)"/>
             </column>
-            <column name="epitaph" type="TEXT"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

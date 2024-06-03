@@ -25,7 +25,4 @@ public class MemoryPage {
     @OneToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
-
-    @Column(name = "epitaph")
-    private String epitaph;
 }

@@ -1,6 +1,6 @@
 package ru.taf.enums;
 
-public enum BotCommands {
+public enum BotCommand {
     HELP("/help"),
     START("/start"),
     ALL_MEMORY_PAGES("/my_pages"),
@@ -8,7 +8,7 @@ public enum BotCommands {
 
     private final String command;
 
-    BotCommands(String command) {
+    BotCommand(String command) {
         this.command = command;
     }
 
@@ -17,8 +17,8 @@ public enum BotCommands {
         return command;
     }
 
-    public static BotCommands fromValue(String v) {
-        for (BotCommands c: BotCommands.values()) {
+    public static BotCommand fromValue(String v) {
+        for (BotCommand c: BotCommand.values()) {
             if (c.command.equals(v)) {
                 return c;
             }

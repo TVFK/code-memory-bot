@@ -15,16 +15,19 @@
             <column name="full_name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="birth_date" type="TIME">
+            <column name="birth_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
-            <column name="death_date" type="TIME">
+            <column name="death_date" type="DATE">
                 <constraints nullable="false"/>
             </column>
             <column name="birth_place" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="citizenship" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="epitaph" type="TEXT">
                 <constraints nullable="false"/>
             </column>
             <column name="burial_place" type="VARCHAR(255)"/>

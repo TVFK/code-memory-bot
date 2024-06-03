@@ -3,6 +3,7 @@ package ru.taf.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,13 +14,13 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL)
     private MemoryPage memoryPage;
 
     @Lob
@@ -38,11 +39,14 @@ public class Person {
     @Column(name = "birth_place")
     private String birthPlace;
 
+    @Column(name = "epitaph")
+    private String epitaph;
+
     @Column(name = "citizenship")
     private String citizenship;
 
     @Column(name = "burial_place")
-    private String deathPlace;
+    private String burialPlace;
 
     @Column(name = "spouse")
     private String spouse;

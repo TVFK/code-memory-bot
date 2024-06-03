@@ -2,6 +2,8 @@ package ru.taf.service;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
@@ -9,7 +11,10 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import ru.taf.service.impl.DefaultMainService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +28,7 @@ public class TelegramMemoryBot extends TelegramLongPollingBot {
 
     private final MainService mainService;
 
-    public TelegramMemoryBot(@Value("${bot.token}") String botToken, MainService mainService) {
+    public TelegramMemoryBot(@Value("${bot.token}") String botToken, @Lazy MainService mainService) {
         super(botToken);
         this.mainService = mainService;
 
@@ -42,7 +47,7 @@ public class TelegramMemoryBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        mainService.processMessage(update, this);
+        mainService.processMessage(update);
     }
 
     @Override
@@ -51,6 +56,20 @@ public class TelegramMemoryBot extends TelegramLongPollingBot {
     }
 
     public void sendAnswerMessage(SendMessage sendMessage) {
+        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setResizeKeyboard(true);
+
+        List<KeyboardRow> rows = new ArrayList<>();
+
+        KeyboardRow row = new KeyboardRow();
+
+        row.add("start");
+        row.add("help");
+
+        rows.add(row);
+
+        replyKeyboardMarkup.setKeyboard(rows);
+
         if (sendMessage != null) {
             try {
                 execute(sendMessage);

@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 import ru.taf.entity.MemoryPage;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MemoryPageRepository extends JpaRepository<MemoryPage, Long> {
-    List<MemoryPage> findMemoryPagesByAuthor_Id(Long id);
+    Optional<List<MemoryPage>> findMemoryPagesByAuthor_Id(Long id);
 }

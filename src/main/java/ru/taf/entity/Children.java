@@ -6,13 +6,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "children")
-public class Children {
+public class Children implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
