@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Memory Page of ' + ${person.fullName}">Memory Page</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .photo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .photo img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details h2 {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 2em;
+        }
+        .details p {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+        .details strong {
+            color: #333;
+            display: inline-block;
+            width: 150px;
+        }
+        .details ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        .details ul li {
+            margin: 5px 0;
+        }
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 10px;
+        }
+        .timeline .date {
+            font-size: 1.2em;
+            color: #333;
+        }
+        .timeline .separator {
+            flex: 1;
+            height: 1px;
+            background-color: #ccc;
+            margin: 0 10px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="photo">
+        <img th:src="@{'data:image/jpeg;base64,' + ${base64Photo}}" alt="Photo of [[${person.fullName}]]">
+    </div>
+    <div class="details">
+        <h2 th:text="${person.fullName}">Full Name</h2>
+        <div class="timeline">
+            <span class="date" th:text="${person.birthDate}">Birth Date</span>
+            <div class="separator"></div>
+            <span class="date" th:text="${person.deathDate}">Death Date</span>
+        </div>
+        <p><strong>Место рождения:</strong> <span th:text="${person.birthPlace}">Birth Place</span></p>
+        <p><strong>Эпитафия:</strong> <span th:text="${person.epitaph}">Epitaph</span></p>
+        <p><strong>Гражданство:</strong> <span th:text="${person.citizenship}">Citizenship</span></p>
+        <p><strong>Место захоронения:</strong> <span th:text="${person.burialPlace}">Burial Place</span></p>
+        <p><strong>Супруга:</strong> <span th:text="${person.spouse}">Spouse</span></p>
+        <p><strong>Профессия:</strong> <span th:text="${person.occupation}">Occupation</span></p>
+        <p><strong>Образование:</strong> <span th:text="${person.education}">Education</span></p>
+        <p><strong>Награды:</strong> <span th:text="${person.awards}">Awards</span></p>
+        <div th:if="${person.children != null && !person.children.isEmpty()}">
+            <p><strong>Дети:</strong></p>
+            <ul>
+                <li th:each="child : ${person.children}" th:text="${child.name}">Child Name</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer">
+        &copy; 2024 Memory Page. All rights reserved.
+    </div>
+</div>
+</body>
+</html>

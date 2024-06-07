@@ -3,6 +3,7 @@ package ru.taf.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.*;
@@ -47,6 +48,7 @@ public class DefaultMainService implements MainService {
     private final ChildrenRepository childrenRepository;
 
     @Override
+    @Transactional
     public void processMessage(Update update) {
 
         TgUser tgUser = findOrSaveTgUser(update);
@@ -75,7 +77,7 @@ public class DefaultMainService implements MainService {
             return switch (cmd) {
                 case HELP -> help();
                 case START -> start();
-                case ALL_MEMORY_PAGES -> listOfMemoryPages(tgUser, update);
+                case ALL_MEMORY_PAGES -> listOfMemoryPages(tgUser);
                 case NEW_MEMORY_PAGE -> newMemoryPage(tgUser, update);
             };
         }
@@ -101,15 +103,24 @@ public class DefaultMainService implements MainService {
                 """;
     }
 
-    private String listOfMemoryPages(TgUser tgUser, Update update) {
-        Optional<List<MemoryPage>> memoryPages = memoryPageRepository.findMemoryPagesByAuthor_Id(tgUser.getId());
+    private String listOfMemoryPages(TgUser tgUser) {
+        List<MemoryPage> memoryPages = tgUser.getMemoryPages();
+        StringBuilder result = new StringBuilder();
 
-        if (memoryPages.isEmpty()) {
-            return memoryPages.toString();
+        if (!memoryPages.isEmpty()) {
+            for (MemoryPage memoryPage : memoryPages) {
+                result
+                        .append(memoryPage.getPerson().getFullName())
+                        .append("- http://localhost:8081/api/v1/memory_pages/")
+                        .append(memoryPage.getId());
+            }
         } else {
             return "Вы пока не создали ни одной страницы памяти";
         }
+
+        return result.toString();
     }
+
 
     private String start() {
         return """
@@ -156,7 +167,7 @@ public class DefaultMainService implements MainService {
 
         Person currentPerson = tgUser.getTempData();
 
-        String answer = "Что-то пошло не так...";
+        String answer;
 
         switch (tgUser.getUserState()) {
             case PHOTO -> {

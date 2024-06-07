@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Getter
 @Setter
 @Entity
@@ -25,4 +24,11 @@ public class MemoryPage {
     @OneToOne
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
+
+    @Override
+    public String toString() {
+        return "MemoryPage\n" +
+                "author=" + author.getUserName() +
+                "\nperson=" + person.getFullName();
+    }
 }

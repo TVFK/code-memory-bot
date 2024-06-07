@@ -9,5 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface MemoryPageRepository extends JpaRepository<MemoryPage, Long> {
-    Optional<List<MemoryPage>> findMemoryPagesByAuthor_Id(Long id);
 }
